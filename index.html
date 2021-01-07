@@ -55,8 +55,8 @@
                         <form id="convertcurrency">
                             <div class="form-row">
                               <div class="form-group col-md-6 mx-auto">
-                                <label for="inputEmail4" class="text-white">Amount</label>
-                                <input type="email" class="form-control" id="inputEmail4" placeholder="Enter amount here">
+                                <label for="amount" class="text-white">Amount</label>
+                                <input type="number" class="form-control" onkeypress="return isNumber(event)" id="amount" placeholder="Enter amount here">
                               </div>
                               
                             </div>
@@ -66,21 +66,45 @@
                                 <div class="form-group col-md-4 mx-auto">
                                     <label for="inputState" class="text-white">Convert from</label>
                                     <select id="inputState" class="form-control">
-                                      <option selected>Choose...</option>
-                                      <option>...</option>
+                                      <option selected>AED</option>
+                                      <option>AFN</option>
+                                      <option>EUR</option>
+                                      <option>HKD</option>
+                                      <option>INR</option>
+                                      <option>KRW</option>
+                                      <option>KWD</option>
+                                      <option>MYR</option>
+                                      <option>NZD</option>
+                                      <option>PHP</option>
+                                      <option>SGD</option>
+                                      <option>THB</option>
+                                      <option>USD</option>
+                                      <option>YER</option>
                                     </select>
                                   </div>
                               <div class="form-group col-md-4 mx-auto">
                                 <label for="inputState" class="text-white">Convert to</label>
                                 <select id="inputState" class="form-control">
-                                  <option selected>Choose...</option>
-                                  <option>...</option>
-                                </select>
+                                    <option selected>AED</option>
+                                    <option>AFN</option>
+                                    <option>EUR</option>
+                                    <option>HKD</option>
+                                    <option>INR</option>
+                                    <option>KRW</option>
+                                    <option>KWD</option>
+                                    <option>MYR</option>
+                                    <option>NZD</option>
+                                    <option>PHP</option>
+                                    <option>SGD</option>
+                                    <option>THB</option>
+                                    <option>USD</option>
+                                    <option>YER</option>
+                                  </select>
                               </div>
                               
                             </div>
                             
-                            <button type="submit" class="btn btn-primary">Convert</button>
+                            <button type="submit" class="btn btn-primary mt-5">Convert</button>
                           </form>
                     </div>
                 </div>
@@ -198,5 +222,20 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
         <!-- Core theme JS-->
         <script src="script.js"></script>
+        <script>
+            function isNumber(evt) {
+                evt = (evt) ? evt : window.event;
+                var charCode = (evt.which) ? evt.which : evt.keyCode;
+                if ((charCode > 31 && (charCode < 48 || charCode > 57))) {
+                    if (charCode == 46){
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+                
+                return true;
+            }
+        </script>
     </body>
 </html>
