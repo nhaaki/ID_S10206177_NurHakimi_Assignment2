@@ -54,3 +54,28 @@
     // Collapse the navbar when page is scrolled
     $(window).scroll(navbarCollapse);
 })(jQuery); // End of use strict
+
+$(document).ready(function() {
+    $("#convertcurrency").submit(function(e){
+        e.preventDefault();
+
+        let convertFrom = $('#cfrom').val();
+        let convertTo = $('#cto').val();
+        let amount = $('#amount').val();
+
+        let sendUrl = "https://api.currencyscoop.com/v1/convert?api_key=c0cacb4ed9e4dbb1c7a52f7a5883ba85&base="
+         + convertFrom + "&to=" + convertTo + "&amount=" + amount;
+        
+        var settings = {
+            "url": sendUrl,
+            "method": "GET"
+        };
+
+        $.ajax(settings).done(function (data){
+            console.log(data);
+            console.log("Value: " + data.response.value);
+
+            $('#val').text(data.response.value.toFixed(2) + " " + data.response.to);
+        })
+    })
+})
