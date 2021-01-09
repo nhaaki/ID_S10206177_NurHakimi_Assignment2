@@ -78,4 +78,28 @@ $(document).ready(function() {
             $('#val').text(data.response.value.toFixed(2) + " " + data.response.to);
         })
     })
+
+    $("#comparison").submit(function(e){
+        e.preventDefault();
+
+        let base = $('#base-currency').val();
+        let compare = $('#comparison-currency').val();
+        
+        let sendUrl = "https://api.currencyscoop.com/v1/latest?api_key=c0cacb4ed9e4dbb1c7a52f7a5883ba85&base="+ base + "&symbols=" + compare;
+        
+        var settings = {
+            "url": sendUrl,
+            "method": "GET"
+        }
+
+        $.ajax(settings).done(function (data){
+            console.log(data);
+
+            if (data.response.rates[Object.keys(data.response.rates)[0]] == 0){
+                console.log("fail!!!!!!");
+            }else{
+                console.log("comparison: " + data.response.rates[Object.keys(data.response.rates)[0]]);
+            }
+        })
+    })
 })
