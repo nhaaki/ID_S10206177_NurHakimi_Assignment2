@@ -96,10 +96,109 @@ $(document).ready(function() {
             console.log(data);
 
             if (data.response.rates[Object.keys(data.response.rates)[0]] == 0){
-                console.log("fail!!!!!!");
+                $("#containerForChart").text("Something went wrong. Did you input the correct ISO 4217 currency codes?");
+                $("#containerForChart").css("color", "darkred");
             }else{
                 console.log("comparison: " + data.response.rates[Object.keys(data.response.rates)[0]]);
+                chart = new Highcharts.chart('containerForChart',{
+                    chart: {
+                        type: 'column'
+                    },
+                    title : {
+                        text: 'Visualisation'
+                    },
+                    subtitle: {
+                        text: 'Base currency has a value of 1'
+                    },
+                    xAxis: {
+                        categories: [
+                            "Compare"
+                        ],
+                        crosshair: true
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'Exchange rate value'
+                        }
+                    },
+                    tooltip: {
+                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                            '<td style="padding:0"><b>{point.y:.3f}</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true
+                    },
+                    plotOptions: {
+                        column: {
+                            pointPadding: 0.2,
+                            borderWidth: 0
+                        }
+                    },
+                    series: [{
+                        name: data.response[Object.keys(data.response)[1]],
+                        data: [1],
+                        color: "black"
+                
+                    }, {
+                        name: Object.keys(data.response.rates)[0],
+                        data: [data.response.rates[Object.keys(data.response.rates)[0]]],
+                        color: "goldenrod"
+                
+                    }]
+                })
             }
-        })
-    })
+        })                
+    });
 })
+
+Highcharts.chart('containerForChart',{
+    chart: {
+        type: 'column'
+    },
+    title : {
+        text: 'Visualisation'
+    },
+    subtitle: {
+        text: 'Base currency has a value of 1'
+    },
+    xAxis: {
+        categories: [
+            "Compare"
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Exchange rate value'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.3f} </b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: "Base",
+        data: [0],
+        color: "black"
+
+    }, {
+        name: "Other",
+        data: [0],
+        color: "goldenrod"
+
+    }]
+})
+            
