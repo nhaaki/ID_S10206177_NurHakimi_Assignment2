@@ -36,6 +36,7 @@
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Convert</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#projects">Compare</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#signup">Contact</a></li>
+                        
                     </ul>
                 </div>
             </div>
@@ -58,6 +59,7 @@
                         <h2 class="text-white mb-4">Convert currencies!</h2>
                         <p class="text-white-50">
                             Here, you can indicate the amount you want to convert, and the currencies that you want to convert from and to.
+                             Refer to <a href="https://currencyscoop.com/supported-currencies">this</a> for all ISO 4217 currency codes that this website supports.
                         </p>
                         <form id="convertcurrency">
                             <div class="form-row">
@@ -130,7 +132,7 @@
                 <div class="row justify-content-center no-gutters">
                     <div class="col-lg-6">
                         <figure class="highcharts-figure">
-                            <div id="containerForChart" class="m-5" style="font-family: 'Roboto Mono', monospace; color: goldenrod;">waiting...</div>
+                            <div id="containerForChart" class="m-5"></div>
                         </figure>
                     </div>
                     <div class="col-lg-6 order-lg-first">
@@ -141,21 +143,34 @@
                                     <form id="comparison">
                                         <div class="form-group">
                                             <label for="formGroupExampleInput" class="text-white">Base currency</label>
-                                            <input type="text" class="form-control" id="base-currency" placeholder="Enter currency here">
+                                            <input type="text" class="form-control" id="base-currency" placeholder="Enter currency code here">
                                         </div>
                                         <div class="form-group">
                                             <label for="formGroupExampleInput2" class="text-white">Comparison currency</label>
-                                            <input type="text" class="form-control" id="comparison-currency" placeholder="Enter currency here">
+                                            <input type="text" class="form-control" id="comparison-currency" placeholder="Enter currency code here">
                                         </div>
 
                                         <button type="submit" class="btn btn-primary">Convert</button>
-
                                     </form>
                                     <hr class="d-none d-lg-block mb-0 mr-0" />
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
+                    <table class="table table-striped table-hover table-dark">
+                        <thead>
+                          <tr class="bg-warning">
+                            <th scope="col">Comparison no.</th>
+                            <th scope="col">Base</th>
+                            <th scope="col">Compared</th>
+                            <th scope="col">Comparison value</th>
+                          </tr>
+                        </thead>
+                        <tbody id="comparison-info">
+                          <!-- update with localstorage content here --> 
+                        </tbody>
+                      </table>
                 </div>
             </div>
         </section>
@@ -170,7 +185,7 @@
                                 <i class="fas fa-map-marked-alt text-primary mb-2"></i>
                                 <h4 class="text-uppercase m-0">Address</h4>
                                 <hr class="my-4" />
-                                <div class="small text-black-50">4923 Market Street, Orlando FL</div>
+                                <div class="small text-black-50">535 Clementi Rd, Singapore 599489</div>
                             </div>
                         </div>
                     </div>
@@ -180,7 +195,7 @@
                                 <i class="fas fa-envelope text-primary mb-2"></i>
                                 <h4 class="text-uppercase m-0">Email</h4>
                                 <hr class="my-4" />
-                                <div class="small text-black-50"><a href="#!">hello@yourdomain.com</a></div>
+                                <div class="small text-black-50"><a href="#!">S10206177@connect.np.edu.sg</a></div>
                             </div>
                         </div>
                     </div>
@@ -190,20 +205,20 @@
                                 <i class="fas fa-mobile-alt text-primary mb-2"></i>
                                 <h4 class="text-uppercase m-0">Phone</h4>
                                 <hr class="my-4" />
-                                <div class="small text-black-50">+1 (555) 902-8832</div>
+                                <div class="small text-black-50">+65 9876 5432</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="social d-flex justify-content-center">
-                    <a class="mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                    <a class="mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                    <a class="mx-2" href="#!"><i class="fab fa-github"></i></a>
+                    <a class="mx-2" href="https://twitter.com/tiny__won/status/1341764743321833473"><i class="fab fa-twitter"></i></a>
+                    <a class="mx-2" href="https://www.reddit.com/r/oddlyterrifying/comments/gka80y/mark_zuckerberg/"><i class="fab fa-facebook-f"></i></a>
+                    <a class="mx-2" href="https://github.com/nhaaki/ID_S10206177_NurHakimi_Assignment2"><i class="fab fa-github"></i></a>
                 </div>
             </div>
         </section>
         <!-- Footer-->
-        <footer class="footer bg-black small text-center text-white-50"><div class="container">Copyright © Your Website 2020</div></footer>
+        <footer class="footer bg-black small text-center text-white-50"><div class="container">Copyright © All things money!</div></footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>

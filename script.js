@@ -43,7 +43,7 @@
 
     // Collapse Navbar
     var navbarCollapse = function () {
-        if ($("#mainNav").offset().top > 100) {
+        if ($("#mainNav").offset().top > 35) {
             $("#mainNav").addClass("navbar-shrink");
         } else {
             $("#mainNav").removeClass("navbar-shrink");
@@ -56,6 +56,9 @@
 })(jQuery); // End of use strict
 
 $(document).ready(function() {
+
+    displayExchange();
+    
     $("#convertcurrency").submit(function(e){
         e.preventDefault();
 
@@ -81,25 +84,48 @@ $(document).ready(function() {
 
     $("#comparison").submit(function(e){
         e.preventDefault();
+        
+        let base = $('#base-currency').val().toUpperCase();
+        let compare = $('#comparison-currency').val().toUpperCase();
 
-        let base = $('#base-currency').val();
-        let compare = $('#comparison-currency').val();
+        if (base && compare){
+            let sendUrl = "https://api.currencyscoop.com/v1/latest?api_key=c0cacb4ed9e4dbb1c7a52f7a5883ba85&base="+ base + "&symbols=" + compare;
         
-        let sendUrl = "https://api.currencyscoop.com/v1/latest?api_key=c0cacb4ed9e4dbb1c7a52f7a5883ba85&base="+ base + "&symbols=" + compare;
-        
-        var settings = {
+            var settings = {
             "url": sendUrl,
             "method": "GET"
+            }
+        }else{
+            $("#containerForChart").replaceWith('<div id="containerForChart" class="m-5" style="color:darkred">Something went wrong. Did you input the correct ISO 4217 currency codes? Refer to <a href="https://currencyscoop.com/supported-currencies">this</a> for all ISO 4217 currency codes that this website supports.</div>');
         }
+        
+        
 
         $.ajax(settings).done(function (data){
-            console.log(data);
+            
 
-            if (data.response.rates[Object.keys(data.response.rates)[0]] == 0){
-                $("#containerForChart").text("Something went wrong. Did you input the correct ISO 4217 currency codes?");
-                $("#containerForChart").css("color", "darkred");
+            if ((data.response.rates[Object.keys(data.response.rates)[0]] == 0) ||
+             (data.response.rates[Object.keys(data.response.rates)[0]] == null)) {
+                $("#containerForChart").replaceWith('<div id="containerForChart" class="m-5" style="color:darkred">Something went wrong. Did you input the correct ISO 4217 currency codes? Refer to <a href="https://currencyscoop.com/supported-currencies">this</a> for all ISO 4217 currency codes that this website supports.</div>');
+
             }else{
-                console.log("comparison: " + data.response.rates[Object.keys(data.response.rates)[0]]);
+                let cValue = data.response.rates[Object.keys(data.response.rates)[0]];
+                
+                console.log("comparison: " + cValue);
+                let cList = [];
+                if (localStorage.getItem('cList')) {
+                    cList = JSON.parse(localStorage.getItem('cList'));
+                }
+                let cNumber = cList.length + 1;
+                let compareItem = new Compare(cNumber, base, compare, cValue);
+
+                cList.push(compareItem);
+
+                localStorage.setItem('cList', JSON.stringify(cList));
+
+                displayExchange();
+
+
                 chart = new Highcharts.chart('containerForChart',{
                     chart: {
                         type: 'column'
@@ -152,6 +178,31 @@ $(document).ready(function() {
         })                
     });
 })
+
+function Compare(cNumber, base, compare, cValue){
+    this.cNum = cNumber;
+    this.b = base;
+    this.c = compare;
+    this.cVal = cValue;
+}
+
+function displayExchange(){
+    let compareInfo = "";
+    if (localStorage.getItem('cList')) {
+        let cList = JSON.parse(localStorage.getItem('cList'));
+    
+        if (cList.length) {
+          for (let compare of cList) {
+            compareInfo += `<tr><td>${compare.cNum}</td><td>${compare.b}</td><td>${compare.c}</td><td>${compare.cVal}</td></tr>`;
+          }
+    
+          $('#comparison-info').html(compareInfo);
+        } else {
+          $('#comparison-info').html('No records found');
+        }
+    }
+
+}
 
 Highcharts.chart('containerForChart',{
     chart: {
