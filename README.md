@@ -94,7 +94,7 @@ Currently, the project hasn't _really_ differentiated itself from other applicat
 
 Since this project makes use of a template that is built upon Bootstrap, the device and screen compatibility works perfectly. The project looks adequately similar to the wireframe of the different devices.
 
-![Wireframe Image](ID_S10206177_NurHakimi_Assignment2/images/wireframeImage.png)
+![Wireframe Image](images/wireframeImage.PNG)
 
 There _aren't_ any interesting bugs or problems faced during my testing.
 
